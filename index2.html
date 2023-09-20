@@ -5,7 +5,17 @@
   </head>
   <body>
     <script>    
-WebAssembly.instantiateStreaming(fetch('a.wasm'))
+const importObject = {
+    env: {
+        someFunction: function() {
+            // ... implementation of someFunction ...
+        },
+        memory: new WebAssembly.Memory({ initial: 10, maximum: 100 })
+    }
+};
+
+
+WebAssembly.instantiateStreaming(fetch('a.wasm'), importObject)
     .then(prog => {
         const instance = prog.instance;
         const exports = instance.exports;
@@ -18,7 +28,7 @@ WebAssembly.instantiateStreaming(fetch('a.wasm'))
         window.Module.stringToUTF8("Bw", ptr, len);
 
         // Call the WebAssembly function with the pointer
-        console.log(exports.stringToGraph("Bw"));
+        console.log(exports.stringToGraph(ptr));
 
         // Free the memory
         exports._free(ptr);
