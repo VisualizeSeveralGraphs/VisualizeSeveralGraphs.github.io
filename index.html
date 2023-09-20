@@ -46,6 +46,13 @@
 <div class="flex-container" id="mytable">
 </div>
 <script>
+
+    WebAssembly.instantiateStreaming(fetch('a.wasm'))
+               .then(prog => {
+                   console.log(prog.instance.exports.stringToGraph("Bw")); 
+               });
+
+
     var uuid = guid();
     var type = $('#graphType').find('option:selected').text();
 
