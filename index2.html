@@ -5,13 +5,28 @@
   </head>
   <body>
     <script>    
-    WebAssembly.instantiateStreaming(fetch('a.wasm'))
-               .then(prog => {
-                   console.log(prog.instance.exports.stringToGraph("Bw")); 
-               })
-               .catch(error => {
-                   console.error("Error:", error);
-               });
+WebAssembly.instantiateStreaming(fetch('a.wasm'))
+    .then(prog => {
+        const instance = prog.instance;
+        const exports = instance.exports;
+
+        // Allocate memory to hold the string "Bw"
+        const len = "Bw".length + 1; // +1 for the null-terminator
+        const ptr = exports._malloc(len);
+
+        // Write the string to memory
+        window.Module.stringToUTF8("Bw", ptr, len);
+
+        // Call the WebAssembly function with the pointer
+        console.log(exports.stringToGraph(ptr));
+
+        // Free the memory
+        exports._free(ptr);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+
     </script>
   </body>
 </html>
