@@ -18,7 +18,7 @@ WebAssembly.instantiateStreaming(fetch('a.wasm'))
         window.Module.stringToUTF8("Bw", ptr, len);
 
         // Call the WebAssembly function with the pointer
-        console.log(exports.stringToGraph(ptr));
+        console.log(exports.stringToGraph("Bw"));
 
         // Free the memory
         exports._free(ptr);
