@@ -17,6 +17,8 @@ const importObject = {
 
 WebAssembly.instantiateStreaming(fetch('a.wasm'), importObject)
     .then(prog => {
+      console.log(prog);
+      
         const instance = prog.instance;
         const exports = instance.exports;
 
