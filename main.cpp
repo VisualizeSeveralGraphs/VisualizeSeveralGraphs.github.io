@@ -1,7 +1,6 @@
 #include <emscripten.h>
-//#include <iostream>
+#include <string>
 #include <vector>
-#include <iostream>
 
 using std::string;
 using std::vector;
@@ -41,7 +40,7 @@ int graphsize(std::string s) {
 
 EMSCRIPTEN_KEEPALIVE
 const char* print_string(const char* g66) {
-    std::string g6(g66)
+    std::string g6(g66);
  int n = graphsize(g6);
 
     std::string graph = "";
