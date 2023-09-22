@@ -60,32 +60,57 @@
         return returnedString;
     }
 
+    function convertToCytoscapeGraph(edgeString) {
+        // Split the string by "--" to get individual edges
+        const edgesArray = edgeString.split("--").slice(0, -1); // Remove the last empty element due to extra "--"
+
+        const nodes = {};
+        const edges = [];
+
+        // Iterate over each edge and extract source and target vertices
+        edgesArray.forEach(edge => {
+        let [source, target] = edge.split(",");
+        // Increment the source and target vertices to start from 1
+        source = parseInt(source) + 1;
+        target = parseInt(target) + 1;
+
+        // Add nodes to the nodes object (this ensures no duplicates)
+        nodes[source] = { data: { id: source.toString() } };
+        nodes[target] = { data: { id: target.toString() } };
+
+        // Add edge to the edges array
+        edges.push({
+            data: {
+                id: `${source}-${target}`,
+                source: source.toString(),
+                target: target.toString()
+            }
+        });
+        });
+
+        return {
+        nodes: Object.values(nodes),
+        edges: edges
+        };
+    }
+
     var uuid = guid();
     var type = $('#graphType').find('option:selected').text();
 
     function send() {
         var strings = document.getElementById("strings").value;
-        var dd = JSON.stringify({
-            "type": "report",
-            "name": $('#reports').find('option:selected').text(),
-            "graph": strings,
-            "uuid": uuid,
-            "propsKeys": $('#reportPropsKeys').html(),
-            "propsVals": $('#reportPropsVals').val(),
-            "directed": type
-        });
         $('#mytable').empty();
         var mytable =$('#mytable');
         var str = "";
         var cnt = 0;
         var cys = [];
-        data.split(',').forEach(function(d) {
+        strings.split(',').forEach(function(d) {
             str+="<div id='g" + cnt + "'></div>";
             cnt++;
         });
         mytable.append(str);
         cnt = 0;
-        data.split(',').forEach(function(d) {
+        strings.split(',').forEach(function(d) {
             var res = passStringToWasm(d);
             var tmpcy = cytoscape({
                 container: document.getElementById("g" + cnt),
@@ -121,8 +146,9 @@
                     }]
             });
             cys.push(tmpcy);
-            var nodes = d.nodes;
-            var edges = d.edges;
+            const graph = convertToCytoscapeGraph(res);
+            var nodes = graph.nodes;
+            var edges = graph.edges;
             tmpcy.elements().remove();
             tmpcy.add(nodes);
             tmpcy.add(edges);
