@@ -196,12 +196,29 @@
         cnt++;
     });
 
-
-    const table = document.createElement('table');
+   // Create the table and table body
+   const table = document.createElement('table');
     const tbody = document.createElement('tbody');
+
+    // Create header row for column labels
+    const headerRow = document.createElement('tr');
+    headerRow.appendChild(document.createElement('th')); // Empty cell for top-left corner
+    mycys.forEach(function (colGraph) {
+        const th = document.createElement('th');
+        th.innerText = `G(${cnt+1})`;
+        headerRow.appendChild(th);
+        cnt++;
+    });
+    tbody.appendChild(headerRow);
+    cnt = 0; // Reset counter for row labels
 
     mycys.forEach(function (rowGraph) {
         const row = document.createElement('tr');
+
+        // Add row label
+        const rowLabel = document.createElement('th');
+        rowLabel.innerText = `G(${cnt+1})`;
+        row.appendChild(rowLabel);
 
         mycys.forEach(function (colGraph) {
             // Create the cell
@@ -210,11 +227,16 @@
             cell.style.textAlign = 'center';
             cell.style.border = '1px solid black';
             cell.style.padding = '10px';
+            cell.style.width = '50px'; // Set width and height to make cells square
+            cell.style.height = '50px';
+            
+            // Append the cell to the row
             row.appendChild(cell);
         });
 
         // Append the row to the table body
         tbody.appendChild(row);
+        cnt++;
     });
 
     // Append the table body to the table
