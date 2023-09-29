@@ -129,28 +129,35 @@ function create_images() {
         cnt++;
     });
 
-    const table = $("<table>").css({
-        borderCollapse: 'collapse',
-        width: '100%'
-    });
+        // Create a new window
+        const newWindow = window.open("", "_blank");
 
-    const headerRow = $("<tr>");
-    headerRow.append($("<th>")); // Empty cell for top-left corner
-    $.each(mycys, function() {
-        headerRow.append($("<th>").text(`G(${++cnt})`));
-    });
-    table.append(headerRow);
-
-    cnt = 0;
-    $.each(mycys, function() {
-        const row = $("<tr>");
-        row.append($("<th>").text(`G(${++cnt})`));
-        $.each(mycys, function() {
-            row.append($("<td>").addClass("table-cell").text('1'));
+        // Create the table in the new window
+        const table = $("<table>").css({
+            borderCollapse: 'collapse',
+            width: '100%'
         });
-        table.append(row);
-    });
-
-    // Append the table to the tableContainer div instead of the body
-    $("#tableContainer").append(table);
+    
+        const headerRow = $("<tr>");
+        headerRow.append($("<th>")); // Empty cell for top-left corner
+        $.each(mycys, function() {
+            headerRow.append($("<th>").text(`G(${++cnt})`));
+        });
+        table.append(headerRow);
+    
+        cnt = 0;
+        $.each(mycys, function() {
+            const row = $("<tr>");
+            row.append($("<th>").text(`G(${++cnt})`));
+            $.each(mycys, function() {
+                row.append($("<td>").addClass("table-cell").text('1'));
+            });
+            table.append(row);
+        });
+    
+        // Write the table's HTML to the new window
+        newWindow.document.write("<html><head><title>Graph Table</title></head><body>");
+        newWindow.document.write(table.prop('outerHTML')); // Convert the table jQuery object to HTML string
+        newWindow.document.write("</body></html>");
+        newWindow.document.close(); // Close the document to finish loading
 }
