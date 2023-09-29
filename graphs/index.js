@@ -17,18 +17,14 @@ function convertToCytoscapeGraph(edgeString) {
     const nodes = {};
     const edges = [];
 
-    // Iterate over each edge and extract source and target vertices
     edgesArray.forEach(edge => {
     let [source, target] = edge.split(",");
-    // Increment the source and target vertices to start from 1
     source = parseInt(source) + 1;
     target = parseInt(target) + 1;
 
-    // Add nodes to the nodes object (this ensures no duplicates)
     nodes[source] = { data: { id: source.toString() } };
     nodes[target] = { data: { id: target.toString() } };
 
-    // Add edge to the edges array
     edges.push({
         data: {
             id: `${source}-${target}`,
@@ -123,23 +119,19 @@ function create_images() {
 
         $("<span>").addClass("graph-name-label").text(`G(${cnt+1})`).appendTo(containerDiv);
 
-        // Append to the imageContainer div instead of the body
         $("#imageContainer").append(containerDiv);
         $("#g" + cnt).hide();
         cnt++;
     });
 
-        // Create a new window
         const newWindow = window.open("", "_blank");
-
-        // Create the table in the new window
         const table = $("<table>").css({
             borderCollapse: 'collapse',
             width: '100%'
         });
     
         const headerRow = $("<tr>");
-        headerRow.append($("<th>")); // Empty cell for top-left corner
+        headerRow.append($("<th>")); 
         $.each(mycys, function() {
             headerRow.append($("<th>").text(`G(${++cnt})`));
         });
@@ -155,9 +147,14 @@ function create_images() {
             table.append(row);
         });
     
-        // Write the table's HTML to the new window
-        newWindow.document.write("<html><head><title>Graph Table</title></head><body>");
-        newWindow.document.write(table.prop('outerHTML')); // Convert the table jQuery object to HTML string
+        newWindow.document.write("<html><head><title>Graph Table</title>");
+        newWindow.document.write("<style>");
+        newWindow.document.write("table { border-collapse: collapse; width: 100%; }");
+        newWindow.document.write("th, td { border: 1px solid black; padding: 5px; text-align: center; }");
+        newWindow.document.write("td.table-cell { width: 30px; height: 30px; font-size: 20px; }");
+        newWindow.document.write("</style>");
+        newWindow.document.write("</head><body>");
+        newWindow.document.write(table.prop('outerHTML'));
         newWindow.document.write("</body></html>");
-        newWindow.document.close(); // Close the document to finish loading
+        newWindow.document.close(); 
 }
