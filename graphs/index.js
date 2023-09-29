@@ -55,11 +55,11 @@ function send() {
     var str = "";
     var cnt = 0;
     var cys = [];
-    // strings.split(',').forEach(function(d) {
-    //     str+="<div id='g" + cnt + "'></div>";
-    //     cnt++;
-    // });
-    // mytable.append(str);
+    strings.split(',').forEach(function(d) {
+        str+="<div id='g" + cnt + "'></div>";
+        cnt++;
+    });
+    mytable.append(str);
     cnt = 0;
     strings.split(',').forEach(function(d) {
         var res = passStringToWasm(d);
