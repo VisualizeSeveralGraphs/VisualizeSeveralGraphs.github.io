@@ -164,7 +164,7 @@
         mycys = cys;
     }
 
-    function create_images() {
+    function create_images1() {
         cnt = 0;
         mycys.forEach(function (c) {
             const imgURI = c.png();
@@ -175,6 +175,39 @@
             cnt++;
         });
     }
+
+
+ function create_images() {
+    let cnt = 0;
+    mycys.forEach(function (c) {
+        const imgURI = c.png();
+
+        // Create a container div for the image and the name
+        const containerDiv = document.createElement('div');
+        containerDiv.style.position = 'relative';
+        containerDiv.style.display = 'inline-block'; // To display images side by side
+        containerDiv.style.margin = '10px'; // Some spacing between images
+
+        // Create the image
+        const img = new Image();
+        img.src = imgURI;
+        containerDiv.appendChild(img);
+
+        // Create the name label
+        const nameLabel = document.createElement('span');
+        nameLabel.innerText = `G(${cnt})`;
+        nameLabel.style.position = 'absolute';
+        nameLabel.style.top = '5px'; // Adjust this to position the name over the image
+        nameLabel.style.left = '5px'; // Adjust this to position the name beside the image
+        nameLabel.style.backgroundColor = 'rgba(255, 255, 255, 0.7)'; // Optional: Add a background to make the name more visible
+        nameLabel.style.padding = '2px 5px'; // Some padding for the name label
+        containerDiv.appendChild(nameLabel);
+
+        document.body.appendChild(containerDiv);
+        document.getElementById("g" + cnt).hidden = true;
+        cnt++;
+    });
+}
 </script>
 </body>
 </html>
