@@ -164,19 +164,6 @@
         mycys = cys;
     }
 
-    function create_images1() {
-        cnt = 0;
-        mycys.forEach(function (c) {
-            const imgURI = c.png();
-            const img = new Image();
-            img.src = imgURI;
-            document.body.appendChild(img);
-            cnt++;
-            document.getElementById("g" + cnt).hidden = true;
-        });
-    }
-
-
  function create_images() {
     let cnt = 0;
     mycys.forEach(function (c) {
@@ -196,7 +183,7 @@
 
         // Create the name label
         const nameLabel = document.createElement('span');
-        nameLabel.innerText = `G(${cnt})`;
+        nameLabel.innerText = `G(${cnt+1})`;
         nameLabel.style.position = 'absolute';
         nameLabel.style.top = '5px'; // Adjust this to position the name over the image
         nameLabel.style.left = '5px'; // Adjust this to position the name beside the image
@@ -208,6 +195,37 @@
         document.getElementById("g" + cnt).hidden = true;
         cnt++;
     });
+
+
+    const table = document.createElement('table');
+    const tbody = document.createElement('tbody');
+
+    mycys.forEach(function (rowGraph) {
+        const row = document.createElement('tr');
+
+        mycys.forEach(function (colGraph) {
+            // Create the cell
+            const cell = document.createElement('td');
+            cell.innerText = '1';
+            cell.style.textAlign = 'center';
+            cell.style.border = '1px solid black';
+            cell.style.padding = '10px';
+            row.appendChild(cell);
+        });
+
+        // Append the row to the table body
+        tbody.appendChild(row);
+    });
+
+    // Append the table body to the table
+    table.appendChild(tbody);
+
+    // Style the table
+    table.style.borderCollapse = 'collapse';
+    table.style.width = '100%';
+
+    // Append the table to the body
+    document.body.appendChild(table);
 }
 </script>
 </body>
