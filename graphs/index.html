@@ -226,15 +226,13 @@
             cell.innerText = '1';
             cell.style.textAlign = 'center';
             cell.style.border = '1px solid black';
-            cell.style.padding = '10px';
-            cell.style.width = '50px'; // Set width and height to make cells square
-            cell.style.height = '50px';
-            
-            // Append the cell to the row
+            cell.style.padding = '5px';
+            cell.style.width = '30px'; 
+            cell.style.height = '30px';
+            cell.style.fontSize = '20px';
             row.appendChild(cell);
         });
 
-        // Append the row to the table body
         tbody.appendChild(row);
         cnt++;
     });
