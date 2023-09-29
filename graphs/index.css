@@ -46,3 +46,7 @@ html, body {
     height: 30px;
     font-size: 20px;
 }
+
+th {
+    background-color: #f2f2f2; /* Light gray background for headers */
+}

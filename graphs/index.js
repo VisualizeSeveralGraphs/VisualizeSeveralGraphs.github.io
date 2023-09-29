@@ -123,7 +123,8 @@ function create_images() {
 
         $("<span>").addClass("graph-name-label").text(`G(${cnt+1})`).appendTo(containerDiv);
 
-        $("body").append(containerDiv);
+        // Append to the imageContainer div instead of the body
+        $("#imageContainer").append(containerDiv);
         $("#g" + cnt).hide();
         cnt++;
     });
@@ -150,5 +151,6 @@ function create_images() {
         table.append(row);
     });
 
-    $("body").append(table);
+    // Append the table to the tableContainer div instead of the body
+    $("#tableContainer").append(table);
 }
