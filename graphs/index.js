@@ -61,7 +61,7 @@ function send() {
         var res = passStringToWasm(d);
         var tmpcy = cytoscape({
             container: document.getElementById("g" + cnt),
-            style: [ // the stylesheet for the graph
+            style: [ 
                 {
                     selector: 'node',
                     style: {
@@ -133,14 +133,14 @@ function create_images() {
         const headerRow = $("<tr>");
         headerRow.append($("<th>")); 
         $.each(mycys, function() {
-            headerRow.append($("<th>").text(`G(${++cnt})`));
+            headerRow.append($("<th>").text(`G${++cnt}`));
         });
         table.append(headerRow);
     
         cnt = 0;
         $.each(mycys, function() {
             const row = $("<tr>");
-            row.append($("<th>").text(`G(${++cnt})`));
+            row.append($("<th>").text(`G${++cnt}`));
             $.each(mycys, function() {
                 row.append($("<td>").addClass("table-cell").text('1'));
             });
