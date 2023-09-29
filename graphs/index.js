@@ -148,11 +148,7 @@ function create_images() {
         });
     
         newWindow.document.write("<html><head><title>Graph Table</title>");
-        newWindow.document.write("<style>");
-        newWindow.document.write("table { border-collapse: collapse; width: 100%; }");
-        newWindow.document.write("th, td { border: 1px solid black; padding: 5px; text-align: center; }");
-        newWindow.document.write("td.table-cell { width: 30px; height: 30px; font-size: 20px; }");
-        newWindow.document.write("</style>");
+        newWindow.document.write('<link rel="stylesheet" type="text/css" href="tableStyles.css">'); // Link the external CSS
         newWindow.document.write("</head><body>");
         newWindow.document.write(table.prop('outerHTML'));
         newWindow.document.write("</body></html>");
