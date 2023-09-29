@@ -114,84 +114,41 @@ function send() {
 }
 
 function create_images() {
-let cnt = 0;
-mycys.forEach(function (c) {
-    const imgURI = c.png();
+    let cnt = 0;
+    $.each(mycys, function(index, c) {
+        const imgURI = c.png();
+        const containerDiv = $("<div>").addClass("image-container");
 
-    // Create a container div for the image and the name
-    const containerDiv = document.createElement('div');
-    containerDiv.style.position = 'relative';
-    containerDiv.style.display = 'inline-block'; // To display images side by side
-    containerDiv.style.margin = '10px'; // Some spacing between images
-    containerDiv.style.fontSize = '25px';
+        $("<img>").attr("src", imgURI).appendTo(containerDiv);
 
-    // Create the image
-    const img = new Image();
-    img.src = imgURI;
-    containerDiv.appendChild(img);
+        $("<span>").addClass("graph-name-label").text(`G(${cnt+1})`).appendTo(containerDiv);
 
-    // Create the name label
-    const nameLabel = document.createElement('span');
-    nameLabel.innerText = `G(${cnt+1})`;
-    nameLabel.style.position = 'absolute';
-    nameLabel.style.top = '5px'; // Adjust this to position the name over the image
-    nameLabel.style.left = '5px'; // Adjust this to position the name beside the image
-    nameLabel.style.backgroundColor = 'rgba(255, 255, 255, 0.7)'; // Optional: Add a background to make the name more visible
-    nameLabel.style.padding = '2px 5px'; // Some padding for the name label
-    containerDiv.appendChild(nameLabel);
-
-    document.body.appendChild(containerDiv);
-    document.getElementById("g" + cnt).hidden = true;
-    cnt++;
-});
-
-// Create the table and table body
-const table = document.createElement('table');
-const tbody = document.createElement('tbody');
-
-// Create header row for column labels
-const headerRow = document.createElement('tr');
-headerRow.appendChild(document.createElement('th')); // Empty cell for top-left corner
-mycys.forEach(function (colGraph) {
-    const th = document.createElement('th');
-    th.innerText = `G(${cnt+1})`;
-    headerRow.appendChild(th);
-    cnt++;
-});
-tbody.appendChild(headerRow);
-cnt = 0; 
-mycys.forEach(function (rowGraph) {
-    const row = document.createElement('tr');
-
-    // Add row label
-    const rowLabel = document.createElement('th');
-    rowLabel.innerText = `G(${cnt+1})`;
-    row.appendChild(rowLabel);
-
-    mycys.forEach(function (colGraph) {
-        // Create the cell
-        const cell = document.createElement('td');
-        cell.innerText = '1';
-        cell.style.textAlign = 'center';
-        cell.style.border = '1px solid black';
-        cell.style.padding = '5px';
-        cell.style.width = '30px'; 
-        cell.style.height = '30px';
-        cell.style.fontSize = '20px';
-        row.appendChild(cell);
+        $("body").append(containerDiv);
+        $("#g" + cnt).hide();
+        cnt++;
     });
 
-    tbody.appendChild(row);
-    cnt++;
-});
+    const table = $("<table>").css({
+        borderCollapse: 'collapse',
+        width: '100%'
+    });
 
-// Append the table body to the table
-table.appendChild(tbody);
+    const headerRow = $("<tr>");
+    headerRow.append($("<th>")); // Empty cell for top-left corner
+    $.each(mycys, function() {
+        headerRow.append($("<th>").text(`G(${++cnt})`));
+    });
+    table.append(headerRow);
 
-// Style the table
-table.style.borderCollapse = 'collapse';
-table.style.width = '100%';
+    cnt = 0;
+    $.each(mycys, function() {
+        const row = $("<tr>");
+        row.append($("<th>").text(`G(${++cnt})`));
+        $.each(mycys, function() {
+            row.append($("<td>").addClass("table-cell").text('1'));
+        });
+        table.append(row);
+    });
 
-// Append the table to the body
-document.body.appendChild(table);
+    $("body").append(table);
 }
