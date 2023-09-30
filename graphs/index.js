@@ -11,8 +11,7 @@ function passStringToWasm(str) {
 }
 
 function convertToCytoscapeGraph(edgeString) {
-    // Split the string by "--" to get individual edges
-    const edgesArray = edgeString.split("--").slice(0, -1); // Remove the last empty element due to extra "--"
+    const edgesArray = edgeString.split("--").slice(0, -1); 
 
     const nodes = {};
     const edges = [];
@@ -44,7 +43,7 @@ mycys = [];
 
 function send() {
     var strings = document.getElementById("strings").value;
-    d3.select('#mytable').html(''); // Clear the content
+    d3.select('#mytable').html(''); 
     var mytable = d3.select('#mytable');
     var str = "";
     var cnt = 0;
@@ -58,6 +57,7 @@ function send() {
     strings.split(',').forEach(function(d) {
         strings.split(',').forEach(function(d) {
             var res = passStringToWasm(d);
+            console.log(res)
             var tmpcy = cytoscape({
                 container: document.getElementById("g" + cnt),
                 style: [ 
@@ -84,7 +84,7 @@ function send() {
                         }
                     },
                     {
-                        selector: 'edge',
+                        selector: 'edge',<script src="https://d3js.org/d3.v5.min.js"></script>
                         style: {
                             'curve-style': 'bezier'
                             // 'target-arrow-shape': arrow
