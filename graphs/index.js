@@ -117,7 +117,7 @@ function create_images() {
 
         $("<img>").attr("src", imgURI).appendTo(containerDiv);
 
-        $("<span>").addClass("graph-name-label").text(`G(${cnt+1})`).appendTo(containerDiv);
+        $("<span>").addClass("graph-name-label").text(`G${cnt+1}`).appendTo(containerDiv);
 
         $("#imageContainer").append(containerDiv);
         $("#g" + cnt).hide();
