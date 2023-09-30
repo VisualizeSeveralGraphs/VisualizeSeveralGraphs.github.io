@@ -132,6 +132,7 @@ function create_images() {
     
         const headerRow = $("<tr>");
         headerRow.append($("<th>")); 
+        cnt = 0;
         $.each(mycys, function() {
             headerRow.append($("<th>").text(`G${++cnt}`));
         });
@@ -139,7 +140,7 @@ function create_images() {
     
         cnt = 0;
         $.each(mycys, function() {
-            const row = $("<tr>");
+            const row = $("<tr>");یا فردا صبح تصمیم بگیریم.
             row.append($("<th>").text(`G${++cnt}`));
             $.each(mycys, function() {
                 row.append($("<td>").addClass("table-cell").text('1'));
