@@ -42,6 +42,7 @@ function convertToCytoscapeGraph(edgeString) {
 mycys = [];
 
 function addElements() {
+    var strings = document.getElementById("strings").value;
     var cnt = 0;
     strings.split(',').forEach(function(d) {
         mytable.append("div").attr("id", "g" + cnt);
