@@ -56,10 +56,10 @@ function send() {
     var str = "";
     var cnt = 0;
     var cys = [];
-    strings.split(',').forEach(function(d) {
-        mytable.append("div").attr("id", "g" + cnt);
-        cnt++;
-    });
+    // strings.split(',').forEach(function(d) {
+    //     mytable.append("div").attr("id", "g" + cnt);
+    //     cnt++;
+    // });
     cnt = 0;
     strings.split(',').forEach(function(d) {
         strings.split(',').forEach(function(d) {
