@@ -41,6 +41,14 @@ function convertToCytoscapeGraph(edgeString) {
 
 mycys = [];
 
+function addElements() {
+    var cnt = 0;
+    strings.split(',').forEach(function(d) {
+        mytable.append("div").attr("id", "g" + cnt);
+        cnt++;
+    });
+}
+
 function send() {
     var strings = document.getElementById("strings").value;
     d3.select('#mytable').html(''); 
