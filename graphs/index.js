@@ -57,9 +57,8 @@ function send() {
     strings.split(',').forEach(function(d) {
         strings.split(',').forEach(function(d) {
             var res = passStringToWasm(d);
-            console.log(res)
             var tmpcy = cytoscape({
-                container: document.getElementById("g" + cnt),
+                container: d3.select("#g" + cnt),
                 style: [ 
                     {
                         selector: 'node',
