@@ -49,10 +49,9 @@ function send() {
     var cnt = 0;
     var cys = [];
     strings.split(',').forEach(function(d) {
-        str += "<div id='g" + cnt + "'></div>";
+        mytable.append("div").attr("id", "g" + cnt);
         cnt++;
     });
-    mytable.html(str);
     cnt = 0;
     strings.split(',').forEach(function(d) {
         strings.split(',').forEach(function(d) {
