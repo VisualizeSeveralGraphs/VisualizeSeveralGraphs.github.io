@@ -40,8 +40,6 @@ function convertToCytoscapeGraph(edgeString) {
     };
 }
 
-var uuid = guid();
-var type = d3.select('#graphType').property('value');
 mycys = [];
 
 function send() {
