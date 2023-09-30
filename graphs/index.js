@@ -140,7 +140,7 @@ function create_images() {
     
         cnt = 0;
         $.each(mycys, function() {
-            const row = $("<tr>");یا فردا صبح تصمیم بگیریم.
+            const row = $("<tr>");
             row.append($("<th>").text(`G${++cnt}`));
             $.each(mycys, function() {
                 row.append($("<td>").addClass("table-cell").text('1'));
