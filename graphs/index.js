@@ -84,7 +84,7 @@ function send() {
                         }
                     },
                     {
-                        selector: 'edge',<script src="https://d3js.org/d3.v5.min.js"></script>
+                        selector: 'edge',
                         style: {
                             'curve-style': 'bezier'
                             // 'target-arrow-shape': arrow
