@@ -102,6 +102,7 @@ function send() {
             tmpcy.add(edges);
             cnt = cnt + 1;
         });
+    });
     
 
     cys.forEach(function (c) {
