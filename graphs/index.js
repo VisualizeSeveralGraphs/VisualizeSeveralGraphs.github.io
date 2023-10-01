@@ -173,7 +173,7 @@ function create_images() {
                 var cell = $(newWindow.document).find(`table tr:eq(${rowIndex}) td:eq(${colIndex})`);
                 cell.text(value==0?1:0);
 
-                if (value != 0) {
+                if (value == 0) {
                     cell.css('background-color', 'yellow'); // or any other color you prefer
                 }
             }
