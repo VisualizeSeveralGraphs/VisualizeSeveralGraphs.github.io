@@ -124,34 +124,62 @@ function create_images() {
         cnt++;
     });
 
-        const newWindow = window.open("", "_blank");
-        const table = $("<table>").css({
-            borderCollapse: 'collapse',
-            width: '100%'
-        });
-    
-        const headerRow = $("<tr>");
-        headerRow.append($("<th>")); 
-        cnt = 0;
+    const newWindow = window.open("", "_blank");
+    const table = $("<table>").css({
+        borderCollapse: 'collapse',
+        width: '100%'
+    });
+
+    const headerRow = $("<tr>");
+    headerRow.append($("<th>")); 
+    cnt = 0;
+    $.each(mycys, function() {
+        headerRow.append($("<th>").text(`G${++cnt}`));
+    });
+    table.append(headerRow);
+
+    cnt = 0;
+    $.each(mycys, function() {
+        const row = $("<tr>");
+        row.append($("<th>").text(`G${++cnt}`));
         $.each(mycys, function() {
-            headerRow.append($("<th>").text(`G${++cnt}`));
+            row.append($("<td>").addClass("table-cell").text('1'));
         });
-        table.append(headerRow);
-    
-        cnt = 0;
-        $.each(mycys, function() {
-            const row = $("<tr>");
-            row.append($("<th>").text(`G${++cnt}`));
-            $.each(mycys, function() {
-                row.append($("<td>").addClass("table-cell").text('1'));
-            });
-            table.append(row);
+        table.append(row);
+    });
+
+    newWindow.document.write("<html><head><title>Graph Table</title>");
+    newWindow.document.write('<link rel="stylesheet" type="text/css" href="tableStyles.css">'); // Link the external CSS
+    newWindow.document.write("</head><body>");
+    newWindow.document.write(table.prop('outerHTML'));
+    newWindow.document.write("</body></html>");
+    newWindow.document.close();
+
+    // Read the CSV file
+    $.get('upton5_homs2.csv', function(data) {
+        // Split the CSV data into lines
+        var lines = data.split('\n');
+
+        // Iterate over each line
+        $.each(lines, function(lineNo, line) {
+            var items = line.split(','); // Assuming comma-separated values
+
+            if (items.length >= 3) {
+                // Extract the row, column, and value
+                var rowIndex = parseInt(items[0]);
+                var colIndex = parseInt(items[1]);
+                var value = items[2];
+
+                // Update the table cell based on the row and column indices
+                var cell = $(newWindow.document).find(`table tr:eq(${rowIndex}) td:eq(${colIndex})`);
+                cell.text(value);
+
+                // Highlight cells with zero values
+                if (value.trim() === '0') {
+                    cell.css('background-color', 'yellow'); // or any other color you prefer
+                }
+            }
         });
-    
-        newWindow.document.write("<html><head><title>Graph Table</title>");
-        newWindow.document.write('<link rel="stylesheet" type="text/css" href="tableStyles.css">'); // Link the external CSS
-        newWindow.document.write("</head><body>");
-        newWindow.document.write(table.prop('outerHTML'));
-        newWindow.document.write("</body></html>");
-        newWindow.document.close(); 
+    });
 }
+
