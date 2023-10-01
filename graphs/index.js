@@ -184,33 +184,33 @@ function create_images() {
 
 
     const newWindow2 = window.open("", "_blank");
-    const table = $("<table>").css({
+    const table2 = $("<table>").css({
         borderCollapse: 'collapse',
         width: '100%'
     });
 
-    const headerRow = $("<tr>");
-    headerRow.append($("<th>")); 
+    const headerRow2 = $("<tr>");
+    headerRow2.append($("<th>")); 
     cnt = 0;
     $.each(mycys, function() {
-        headerRow.append($("<th>").text(`G${++cnt}`));
+        headerRow.2append($("<th>").text(`G${++cnt}`));
     });
-    table.append(headerRow);
+    table2.append(headerRow2);
 
     cnt = 0;
     $.each(mycys, function() {
-        const row = $("<tr>");
-        row.append($("<th>").text(`G${++cnt}`));
+        const row2 = $("<tr>");
+        row2.append($("<th>").text(`G${++cnt}`));
         $.each(mycys, function() {
-            row.append($("<td>").addClass("table-cell").text('0'));
+            row2.append($("<td>").addClass("table-cell").text('0'));
         });
-        table.append(row);
+        table2.append(row2);
     });
 
     newWindow2.document.write("<html><head><title>Graph Table</title>");
     newWindow2.document.write('<link rel="stylesheet" type="text/css" href="tableStyles.css">'); // Link the external CSS
     newWindow2.document.write("</head><body>");
-    newWindow2.document.write(table.prop('outerHTML'));
+    newWindow2.document.write(table2.prop('outerHTML'));
     newWindow2.document.write("</body></html>");
     newWindow2.document.close();
 
@@ -230,7 +230,7 @@ function create_images() {
                 var value = parseInt(items[2]);
 
                 // Update the table cell based on the row and column indices
-                var cell = $(newWindow2.document).find(`table tr:eq(${rowIndex}) td:eq(${colIndex})`);
+                var cell = $(newWindow2.document).find(`table2 tr:eq(${rowIndex}) td:eq(${colIndex})`);
                 if(value == 0)
                     cell.text(1);
                 else 
