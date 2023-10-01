@@ -167,7 +167,7 @@ function create_images() {
             if (items.length >= 3) {
                 // Extract the row, column, and value
                 var rowIndex = parseInt(items[0]) + 1;
-                var colIndex = parseInt(items[1]) + 1;
+                var colIndex = parseInt(items[1]);
                 var value = items[2];
 
                 // Update the table cell based on the row and column indices
