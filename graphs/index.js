@@ -124,7 +124,7 @@ function create_images() {
         cnt++;
     });
 
-    const newWindow = window.open("", "_blank", 1);
+    const newWindow = window.open("", "_blank", "", 1);
     const table = $("<table>").css({
         borderCollapse: 'collapse',
         width: '100%'
@@ -183,7 +183,7 @@ function create_images() {
     });
 
 
-    const newWindow2 = window.open("", "_blank", 2);
+    const newWindow2 = window.open("", "_blank", "",2);
     const table2 = $("<table>").css({
         borderCollapse: 'collapse',
         width: '100%'
