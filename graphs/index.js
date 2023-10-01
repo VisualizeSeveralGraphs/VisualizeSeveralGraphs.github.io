@@ -168,76 +168,12 @@ function create_images() {
                 // Extract the row, column, and value
                 var rowIndex = parseInt(items[0]) + 1;
                 var colIndex = parseInt(items[1]);
-                var value = items[2];
-
-                // Update the table cell based on the row and column indices
-                var cell = $(newWindow.document).find(`table tr:eq(${rowIndex}) td:eq(${colIndex})`);
-                cell.text(value);
-
-                // Highlight cells with zero values
-                if (value.trim() === '0') {
-                    cell.css('background-color', 'yellow'); // or any other color you prefer
-                }
-            }
-        });
-    });
-
-
-    const newWindow2 = window.open("", "_blank", "",2);
-    const table2 = $("<table>").css({
-        borderCollapse: 'collapse',
-        width: '100%'
-    });
-
-    const headerRow2 = $("<tr>");
-    headerRow2.append($("<th>")); 
-    cnt = 0;
-    $.each(mycys, function() {
-        headerRow2.append($("<th>").text(`G${++cnt}`));
-    });
-    table2.append(headerRow2);
-
-    cnt = 0;
-    $.each(mycys, function() {
-        const row2 = $("<tr>");
-        row2.append($("<th>").text(`G${++cnt}`));
-        $.each(mycys, function() {
-            row2.append($("<td>").addClass("table-cell").text('0'));
-        });
-        table2.append(row2);
-    });
-
-    newWindow2.document.write("<html><head><title>Graph Table</title>");
-    newWindow2.document.write('<link rel="stylesheet" type="text/css" href="tableStyles.css">'); // Link the external CSS
-    newWindow2.document.write("</head><body>");
-    newWindow2.document.write(table2.prop('outerHTML'));
-    newWindow2.document.write("</body></html>");
-    newWindow2.document.close();
-
-    // Read the CSV file
-    $.get('upton5_homs2.csv', function(data) {
-        // Split the CSV data into lines
-        var lines = data.split('\n');
-
-        // Iterate over each line
-        $.each(lines, function(lineNo, line) {
-            var items = line.split(','); // Assuming comma-separated values
-
-            if (items.length >= 3) {
-                // Extract the row, column, and value
-                var rowIndex = parseInt(items[0]) + 1;
-                var colIndex = parseInt(items[1]);
                 var value = parseInt(items[2]);
 
-                // Update the table cell based on the row and column indices
-                var cell = $(newWindow2.document).find(`table tr:eq(${rowIndex}) td:eq(${colIndex})`);
-                if(value == 0)
-                    cell.text(1);
-                else 
-                    cell.text(0)
+                var cell = $(newWindow.document).find(`table tr:eq(${rowIndex}) td:eq(${colIndex})`);
+                cell.text(value==0?1:0);
 
-                // Highlight cells with zero values
-                if (value !== '0') {
+                if (value !== 0) {
                     cell.css('background-color', 'yellow'); // or any other color you prefer
                 }
             }
