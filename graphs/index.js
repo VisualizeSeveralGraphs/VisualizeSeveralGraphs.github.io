@@ -124,7 +124,7 @@ function create_images() {
         cnt++;
     });
 
-    const newWindow = window.open("", "_blank");
+    const newWindow = window.open("", "_blank", 1);
     const table = $("<table>").css({
         borderCollapse: 'collapse',
         width: '100%'
@@ -183,7 +183,7 @@ function create_images() {
     });
 
 
-    const newWindow2 = window.open("", "_blank");
+    const newWindow2 = window.open("", "_blank", 2);
     const table2 = $("<table>").css({
         borderCollapse: 'collapse',
         width: '100%'
@@ -230,14 +230,14 @@ function create_images() {
                 var value = parseInt(items[2]);
 
                 // Update the table cell based on the row and column indices
-                var cell = $(newWindow2.document).find(`table2 tr:eq(${rowIndex}) td:eq(${colIndex})`);
+                var cell = $(newWindow2.document).find(`table tr:eq(${rowIndex}) td:eq(${colIndex})`);
                 if(value == 0)
                     cell.text(1);
                 else 
                     cell.text(0)
 
                 // Highlight cells with zero values
-                if (value.trim() !== '0') {
+                if (value !== '0') {
                     cell.css('background-color', 'yellow'); // or any other color you prefer
                 }
             }
