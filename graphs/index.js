@@ -181,5 +181,67 @@ function create_images() {
             }
         });
     });
+
+
+    const newWindow2 = window.open("", "_blank");
+    const table = $("<table>").css({
+        borderCollapse: 'collapse',
+        width: '100%'
+    });
+
+    const headerRow = $("<tr>");
+    headerRow.append($("<th>")); 
+    cnt = 0;
+    $.each(mycys, function() {
+        headerRow.append($("<th>").text(`G${++cnt}`));
+    });
+    table.append(headerRow);
+
+    cnt = 0;
+    $.each(mycys, function() {
+        const row = $("<tr>");
+        row.append($("<th>").text(`G${++cnt}`));
+        $.each(mycys, function() {
+            row.append($("<td>").addClass("table-cell").text('0'));
+        });
+        table.append(row);
+    });
+
+    newWindow2.document.write("<html><head><title>Graph Table</title>");
+    newWindow2.document.write('<link rel="stylesheet" type="text/css" href="tableStyles.css">'); // Link the external CSS
+    newWindow2.document.write("</head><body>");
+    newWindow2.document.write(table.prop('outerHTML'));
+    newWindow2.document.write("</body></html>");
+    newWindow2.document.close();
+
+    // Read the CSV file
+    $.get('upton5_homs2.csv', function(data) {
+        // Split the CSV data into lines
+        var lines = data.split('\n');
+
+        // Iterate over each line
+        $.each(lines, function(lineNo, line) {
+            var items = line.split(','); // Assuming comma-separated values
+
+            if (items.length >= 3) {
+                // Extract the row, column, and value
+                var rowIndex = parseInt(items[0]) + 1;
+                var colIndex = parseInt(items[1]);
+                var value = parseInt(items[2]);
+
+                // Update the table cell based on the row and column indices
+                var cell = $(newWindow2.document).find(`table tr:eq(${rowIndex}) td:eq(${colIndex})`);
+                if(value == 0)
+                    cell.text(1);
+                else 
+                    cell.text(0)
+
+                // Highlight cells with zero values
+                if (value.trim() !== '0') {
+                    cell.css('background-color', 'yellow'); // or any other color you prefer
+                }
+            }
+        });
+    });
 }
 
