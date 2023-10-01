@@ -43,7 +43,6 @@ mycys = [];
 
 function addElements() {
     var strings = document.getElementById("strings").value;
-    var mytable = d3.select('#mytable');
     var cnt = 0;
     strings.split(',').forEach(function(d) {
         mytable.append("div").attr("id", "g" + cnt);
