@@ -193,7 +193,7 @@ function create_images() {
     headerRow2.append($("<th>")); 
     cnt = 0;
     $.each(mycys, function() {
-        headerRow.2append($("<th>").text(`G${++cnt}`));
+        headerRow2.append($("<th>").text(`G${++cnt}`));
     });
     table2.append(headerRow2);
 
