@@ -143,7 +143,7 @@ function create_images() {
         const row = $("<tr>");
         row.append($("<th>").text(`G${++cnt}`));
         $.each(mycys, function() {
-            row.append($("<td>").addClass("table-cell").text('0'));
+            row.append($("<td>").addClass("table-cell").text('-'));
         });
         table.append(row);
     });
