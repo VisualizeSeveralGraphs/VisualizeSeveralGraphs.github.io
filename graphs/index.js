@@ -171,7 +171,7 @@ function create_images() {
                 var value = parseInt(items[2]);
 
                 var cell = $(newWindow.document).find(`table tr:eq(${rowIndex}) td:eq(${colIndex})`);
-                cell.text(value==0?1:0);
+                cell.text(value==0?0:value);
 
                 if (value == 0) {
                     cell.css('background-color', 'yellow'); // or any other color you prefer
