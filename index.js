@@ -32,8 +32,6 @@ function convertToCytoscapeGraph(edgeString) {
     return { nodes: Object.values(nodes), edges };
 }
 
-var mycys = [];
-
 function send() {
     var strings = document.getElementById("strings").value;
     $('#mytable').empty();
@@ -92,78 +90,4 @@ function send() {
     cys.forEach(function(c) {
         c.layout({ name: "cose" }).run();
     });
-    mycys = cys;
 }
-
-function create_images() {
-    let cnt = 0;
-    $.each(mycys, function(index, c) {
-        const imgURI = c.png();
-        const containerDiv = $("<div>").addClass("image-container");
-
-        $("<img>").attr("src", imgURI).appendTo(containerDiv);
-
-        $("<span>").addClass("graph-name-label").text(`G${cnt+1}`).appendTo(containerDiv);
-
-        $("#imageContainer").append(containerDiv);
-        $("#g" + cnt).hide();
-        cnt++;
-    });
-
-    const newWindow = window.open("", "_blank", "", 1);
-    const table = $("<table>").css({
-        borderCollapse: 'collapse',
-        width: '100%'
-    });
-
-    const headerRow = $("<tr>");
-    headerRow.append($("<th>")); 
-    cnt = 0;
-    $.each(mycys, function() {
-        headerRow.append($("<th>").text(`G${++cnt}`));
-    });
-    table.append(headerRow);
-
-    cnt = 0;
-    $.each(mycys, function() {
-        const row = $("<tr>");
-        row.append($("<th>").text(`G${++cnt}`));
-        $.each(mycys, function() {
-            row.append($("<td>").addClass("table-cell").text('-'));
-        });
-        table.append(row);
-    });
-
-    newWindow.document.write("<html><head><title>Graph Table</title>");
-    newWindow.document.write('<link rel="stylesheet" type="text/css" href="tableStyles.css">'); // Link the external CSS
-    newWindow.document.write("</head><body>");
-    newWindow.document.write(table.prop('outerHTML'));
-    newWindow.document.write("</body></html>");
-    newWindow.document.close();
-
-    // Read the CSV file
-    $.get('upton5_homs2.csv', function(data) {
-        // Split the CSV data into lines
-        var lines = data.split('\n');
-
-        // Iterate over each line
-        $.each(lines, function(lineNo, line) {
-            var items = line.split(','); // Assuming comma-separated values
-
-            if (items.length >= 3) {
-                // Extract the row, column, and value
-                var rowIndex = parseInt(items[0]) + 1;
-                var colIndex = parseInt(items[1]);
-                var value = parseInt(items[2]);
-
-                var cell = $(newWindow.document).find(`table tr:eq(${rowIndex}) td:eq(${colIndex})`);
-                cell.text(value==0?0:value);
-
-                if (value == 0) {
-                    cell.css('background-color', 'yellow'); // or any other color you prefer
-                }
-            }
-        });
-    });
-}
-
