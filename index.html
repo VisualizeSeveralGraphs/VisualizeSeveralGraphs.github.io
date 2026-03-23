@@ -13,40 +13,119 @@
     <script src="main.js"></script>
     <script src="index.js"></script>
     <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
         html, body {
-            font-family: Times New Roman, Times, serif;
-            width: 100%;
-            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f5f6fa;
+            color: #2d2d2d;
             min-height: 100%;
         }
+
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+            color: white;
+            padding: 2rem 2.5rem 1.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
+
+        header h1 {
+            margin: 0 0 0.4rem;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            max-width: 680px;
+            line-height: 1.5;
+        }
+
+        header a {
+            color: #7ecfff;
+            text-decoration: none;
+        }
+
+        header a:hover { text-decoration: underline; }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.25rem 2.5rem;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            flex-wrap: wrap;
+        }
+
+        .toolbar label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #555;
+            white-space: nowrap;
+        }
+
+        .toolbar input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-family: monospace;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .toolbar input:focus { border-color: #0f3460; }
+
+        .toolbar button {
+            padding: 0.5rem 1.25rem;
+            background: #0f3460;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .toolbar button:hover { background: #16213e; }
+
         .flex-container {
             display: flex;
             flex-wrap: wrap;
-            /*background-color: DodgerBlue;*/
+            padding: 1.5rem 2rem;
+            gap: 1rem;
         }
 
         .flex-container > div {
-            /*background-col!**!or: #f1f1f1;*/
             width: 400px;
             height: 400px;
-            border: solid 1px;
-            /*margin: 10px;*/
-            /*text-align: center;*/
-            /*line-height: 75px;*/
-            /*font-size: 30px;*/
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
         }
     </style>
 </head>
 <body>
-<h2>GraphTea</h2>
-<p>Enter a comma-separated list of graphs in <a href="https://users.cecs.anu.edu.au/~bdm/data/formats.txt">g6 format</a> and click <strong>Go</strong> to visualize them as an interactive grid. Each graph is decoded and rendered individually using a force-directed layout.</p>
-<div>
-    <label for="strings">Enter a list of g6 strings:</label>
+<header>
+    <h1>GraphTea</h1>
+    <p>Enter a comma-separated list of graphs in <a href="https://users.cecs.anu.edu.au/~bdm/data/formats.txt">g6 format</a> and click <strong>Go</strong> to visualize them as an interactive grid. Each graph is decoded and rendered individually using a force-directed layout.</p>
+</header>
+<div class="toolbar">
+    <label for="strings">g6 strings:</label>
     <input id="strings" value="M???????????}?p~_,M?????????O?}?p}_,M?????????O?}?X}_,M?????????O?}?`~_,M?????????O?}?P~_,M?????????O?^?{}?,M?????????O?^?w~?,M?????????O?^?w}_,M?????????O?^?o~_,M?????????O?{@r}?,M?????????O?{@Z}?,M?????????O?{@b~?,M?????????O?{@b}_,M?????????O?{@R}_">
     <button onclick="send();">Go</button>
-    <br/>
 </div>
-<div class="flex-container" id="mytable">
-</div>
+<div class="flex-container" id="mytable"></div>
 </body>
 </html>
